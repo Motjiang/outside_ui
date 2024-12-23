@@ -1,0 +1,38 @@
+
+.gallary__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .image__gallary {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .gallary__col {
+    display: grid;
+    place-content: center;
+    gap: 1rem;
+  }
+  
+  .gallary__col img {
+    border-radius: 1rem;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gallary__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .gallary__content > div {
+    max-width: 400px;
+  }
+  
+  .gallary__content .section__subtitle {
+    margin-bottom: 2rem;
+  }
