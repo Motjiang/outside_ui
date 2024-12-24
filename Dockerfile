@@ -1,21 +1,27 @@
-FROM node:18.20.4 
+# Stage 1: Build Angular App
+FROM node:18.20.4 AS build
 
 WORKDIR /app
 
-COPY packages*.json ./
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install
 
-# RUN npm ci
-
+# Install Angular CLI
 RUN npm install -g @angular/cli
 
+# Copy all files and build the app
 COPY . .
-
 RUN npm run build --configuration=production
 
+# Stage 2: Serve with nginx
 FROM nginx:latest
 
+# Copy nginx configuration
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY  /app/dist/outside_ui/browser /usr/share/nginx/html
+# Copy built app to nginx's html directory
+COPY --from=build /app/dist/outside_ui /usr/share/nginx/html
 
+# Expose port 80 for the app
 EXPOSE 80
