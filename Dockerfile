@@ -1,10 +1,10 @@
-FROM node:18.20.4 as build
+FROM node:18.20.4 
 
 WORKDIR /app
 
 COPY packages*.json ./
 
-RUN npm ci
+# RUN npm ci
 
 RUN npm install -g @angular/cli
 
@@ -16,6 +16,6 @@ FROM nginx:latest
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist/outside_ui/browser /usr/share/nginx/html
+COPY  /app/dist/outside_ui/browser /usr/share/nginx/html
 
 EXPOSE 80
